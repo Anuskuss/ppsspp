@@ -520,6 +520,7 @@ void VertexDecoder::Step_Color5551() const
 	u8 *c = decoded_ + decFmt.c0off;
 	u16 cdata = *(const u16_le *)(ptr_ + coloff);
 	gstate_c.vertexFullAlpha = gstate_c.vertexFullAlpha && (cdata >> 15) != 0;
+
 	c[0] = Convert5To8(cdata & 0x1f);
 	c[1] = Convert5To8((cdata >> 5) & 0x1f);
 	c[2] = Convert5To8((cdata >> 10) & 0x1f);
@@ -558,7 +559,7 @@ void VertexDecoder::Step_Color565Morph() const
 		c[i] = clamp_u8((int)col[i]);
 	}
 	c[3] = 255;
-	// Always full alpha.
+	// Always full alpha. (Is this true??)
 }
 
 void VertexDecoder::Step_Color5551Morph() const
