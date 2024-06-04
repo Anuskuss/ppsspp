@@ -2483,9 +2483,11 @@ if(USE_MINIUPNPC)
 		endif()
 
 		add_definitions(-DWITH_UPNP -DMINIUPNP_STATICLIB)
-		set(MINIUPNP_DIR "ext/miniupnp/miniupnpc")
+		set(MINIUPNP_DIR "ext/miniupnp/miniupnpc/src")
 		include_directories(${CMAKE_CURRENT_BINARY_DIR})
-		configure_file(${MINIUPNP_DIR}/miniupnpcstrings.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/miniupnpcstrings.h) # by default miniupnp repo doesn't contains miniupnpcstrings.h and need to be generated
+		include_directories(ext/miniupnp/miniupnpc/src)
+		include_directories(ext/miniupnp/miniupnpc/include)
+		#configure_file(${MINIUPNP_DIR}/miniupnpcstrings.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/miniupnpcstrings.h) # by default miniupnp repo doesn't contains miniupnpcstrings.h and need to be generated
 		set(MINIUPNPC_SOURCES
 			# the needed bits of miniupnpc (no python module, no tests, no cli)
 			${MINIUPNP_DIR}/addr_is_reserved.c
@@ -2494,6 +2496,7 @@ if(USE_MINIUPNPC)
 			${MINIUPNP_DIR}/minisoap.c
 			${MINIUPNP_DIR}/minissdpc.c
 			${MINIUPNP_DIR}/miniupnpc.c
+			#${MINIUPNP_DIR}/miniupnpcmodule.c
 			${MINIUPNP_DIR}/miniwget.c
 			${MINIUPNP_DIR}/minixml.c
 			${MINIUPNP_DIR}/minixmlvalid.c
